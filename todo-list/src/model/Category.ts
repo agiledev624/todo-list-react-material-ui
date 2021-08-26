@@ -1,4 +1,4 @@
-export interface Task {
-    catergoryIndex: number;
+export interface Category {
+    iconIndex: number;
     text: string;
 }

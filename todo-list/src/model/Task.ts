@@ -1,4 +1,4 @@
-export interface Category {
+export interface Todo {
     taskName: string;
-    deadline: number;
+    category: string;
 }
