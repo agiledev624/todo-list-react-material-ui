@@ -82,7 +82,7 @@ export const Header: FC<{ classNames: string }> = ({ classNames }) => {
   const { categoryList, setCategoryList, setOpen, setCurrent } =
     useContext(TodoContext);
   const [taskName, setTaskName] = useState<string>("");
-  const [deadline, setDeadline] = useState<number | string>(0); // allow number | string because setting state for number input to undefined, does not clear the input.
+  const [iconIndex, setIconIndex] = useState<number | string>(0); // allow number | string because setting state for number input to undefined, does not clear the input.
 
   const onChangeTaskName = (event: ChangeEvent<HTMLInputElement>): void => {
     setTaskName(event.target.value);
@@ -93,14 +93,14 @@ export const Header: FC<{ classNames: string }> = ({ classNames }) => {
   ): void => {
     const deadLine = Number(event.target.value);
     if (deadLine >= 0) {
-      setDeadline(deadLine);
+      setIconIndex(deadLine);
     } else {
-      setDeadline(0);
+      setIconIndex(0);
     }
   };
+
   const validateTask = (task: Category): boolean => {
     if (!task.text || task.text.trim().length === 0) {
-      // alert("Must provide task name.");
       setOpen(true);
       return false;
     }
@@ -110,19 +110,18 @@ export const Header: FC<{ classNames: string }> = ({ classNames }) => {
       return false;
     }
 
-    // deadline not required, but validate if present.
+    // iconIndex not required, but validate if present.
     if (task.iconIndex != null && task.iconIndex < 0) {
-      // alert("Deadline must be greater than zero.");
       setOpen(true);
       return false;
     }
-
     return true;
   };
+
   const addTask = (): void => {
     const task: Category = {
       text: taskName,
-      iconIndex: Number(deadline),
+      iconIndex: Number(iconIndex),
     };
 
     if (!validateTask(task)) {
@@ -133,7 +132,7 @@ export const Header: FC<{ classNames: string }> = ({ classNames }) => {
     setCategoryList([task].concat(categoryList));
     setCurrent(taskName);
     setTaskName("");
-    setDeadline(0);
+    setIconIndex(0);
   };
 
   return (
@@ -160,16 +159,6 @@ export const Header: FC<{ classNames: string }> = ({ classNames }) => {
 
         <Box p="10px">
           <label htmlFor="deadline">
-            {/* <TextField
-                            id="outlined-basic"
-                            className="deadline-input"
-                            name="deadline"
-                            onChange={onChangeDeadline}
-                            placeholder="days"
-                            type="number"
-                            value={deadline}
-                            variant="outlined"
-                        /> */}
             <InputLabel
               id="demo-simple-select-label"
               className="color-white"
@@ -181,7 +170,7 @@ export const Header: FC<{ classNames: string }> = ({ classNames }) => {
               color="secondary"
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              value={deadline}
+              value={iconIndex}
               onChange={onChangeDeadline}
             >
               {Icons.map((name: string, index: number) => {
@@ -191,9 +180,6 @@ export const Header: FC<{ classNames: string }> = ({ classNames }) => {
                   </MenuItem>
                 );
               })}
-              {/* <MenuItem value={10}><Icon>{Icons[task.deadline]}</Icon></MenuItem> */}
-
-              {/* <MenuItem value={30}>Thirty</MenuItem> */}
             </Select>
           </label>
         </Box>

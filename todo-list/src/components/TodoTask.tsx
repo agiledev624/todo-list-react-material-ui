@@ -1,8 +1,8 @@
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import { Todo } from "../model/Task";
 import styled from "styled-components";
 import DeleteOutlineOutlined from "@material-ui/icons/DeleteOutlineOutlined";
-import { Box, IconButton } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
 
 const StyledTodoTask = styled.div`
   &.task {
@@ -70,11 +70,6 @@ const StyledTodoTask = styled.div`
   }
 `;
 
-const MAX_TASK_NAME_DISPLAY_LENGTH = 200;
-
-const getTaskNamePreview = (taskName: string): string =>
-  taskName.substr(0, MAX_TASK_NAME_DISPLAY_LENGTH); // take the first 200 characters of the task name.
-
 interface Props {
   task: Todo;
   completeTask: (taskNameToDelete: string) => void;
@@ -82,29 +77,10 @@ interface Props {
 
 export const TodoTask: FC<Props> = (props) => {
   const { task, completeTask } = props;
-
-  const [showMore, setShowMore] = useState<boolean>(false);
-
-  const isTextShortened = task.taskName.length > MAX_TASK_NAME_DISPLAY_LENGTH;
-
   return (
     <StyledTodoTask className="task">
       <div className="content">
-        <div className="task-row-column task-name">
-          {isTextShortened
-            ? showMore
-              ? task.taskName
-              : getTaskNamePreview(task.taskName)
-            : task.taskName}
-          {isTextShortened && (
-            <Box
-              className="toggle-text-button"
-              onClick={() => setShowMore(!showMore)}
-            >
-              show {showMore ? "less" : "more"}
-            </Box>
-          )}
-        </div>
+        <div className="task-row-column task-name">{task.taskName}</div>
       </div>
 
       <IconButton

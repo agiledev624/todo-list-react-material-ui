@@ -1,21 +1,13 @@
-import React, { FC, useContext } from "react";
-import "./App.scss";
+import React, { FC } from "react";
+import { createTheme, Toolbar } from "@material-ui/core";
+import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
+import styled, { ThemeProvider } from "styled-components";
+import Drawer from "@material-ui/core/Drawer";
 import { Header } from "./components/Header";
 import { TodoContextProvider } from "./components/TodoContext";
 import { TodoList } from "./components/TodoList";
-import styled, { ThemeProvider } from "styled-components";
-import { createTheme } from "@material-ui/core";
-import { createStyles, Theme, makeStyles } from "@material-ui/core/styles";
-import Drawer from "@material-ui/core/Drawer";
-import {
-  Toolbar,
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
-} from "@material-ui/core";
-import { TodoContext } from "./components/TodoContext";
 import { CategoryList } from "./components/CategoryList";
+import "./App.scss";
 
 const StyledApp = styled.div`
   &.app {
@@ -27,6 +19,7 @@ const StyledApp = styled.div`
     font-family: Arial, Helvetica, sans-serif;
   }
 `;
+
 const drawerWidth = 240;
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -53,6 +46,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
   })
 );
+
 export const App: FC = () => {
   const theme = createTheme({
     palette: {
@@ -70,9 +64,8 @@ export const App: FC = () => {
       },
     },
   });
-  // const {todoList, setTodoList} = useContext(TodoContext);
   const classes = useStyles();
-  console.log("home re-rendering");
+
   return (
     <ThemeProvider theme={theme}>
       <TodoContextProvider>

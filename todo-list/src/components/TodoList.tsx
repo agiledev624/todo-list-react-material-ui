@@ -1,13 +1,10 @@
 import React, { ChangeEvent, FC, useContext, useEffect, useState } from "react";
 import { Todo } from "../model/Task";
-import { Category } from "../model/Category";
 import styled from "styled-components";
 import { TodoTask } from "./TodoTask";
 import { TodoContext } from "./TodoContext";
-import AddIcon from "@material-ui/icons/Add";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
-import { makeStyles, Theme } from "@material-ui/core/styles";
 import { Box, Button, TextField, Paper } from "@material-ui/core";
 
 const Alert = (props: AlertProps) => {
