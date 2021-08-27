@@ -42,7 +42,7 @@ export const CategoryList: FC = (props) => {
 
     if (categoryList.length > 0 && categoryList[0].text !== categoryToDelete) {
       setCurrent(categoryList[0].text);
-    } else if (categoryList.length > 0) {
+    } else if (categoryList.length > 1) {
       setCurrent(categoryList[1].text);
     }
 

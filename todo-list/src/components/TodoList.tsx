@@ -113,34 +113,36 @@ export const TodoList: FC = (props) => {
 
   return (
     <StyledTodoList className="todo-list">
-      {categoryList.length > 0 && (
-        <Paper>
-          <h2>Add To {current}</h2>
-          <div className="input-container">
-            <Box p="10px">
-              <label htmlFor="task">
-                <TextField
-                  id="outlined-basic"
-                  className="task-name-input"
-                  multiline
-                  name="task"
-                  onChange={onChangeTaskName}
-                  type="text"
-                  placeholder="Input Todo"
-                  value={taskName}
-                  variant="outlined"
-                />
-              </label>
-            </Box>
+      {categoryList.length > 0 &&
+        current !== "nothing" &&
+        current !== undefined && (
+          <Paper>
+            <h2>Add To {current}</h2>
+            <div className="input-container">
+              <Box p="10px">
+                <label htmlFor="task">
+                  <TextField
+                    id="outlined-basic"
+                    className="task-name-input"
+                    multiline
+                    name="task"
+                    onChange={onChangeTaskName}
+                    type="text"
+                    placeholder="Input Todo"
+                    value={taskName}
+                    variant="outlined"
+                  />
+                </label>
+              </Box>
 
-            <Box p="10px">
-              <Button variant="contained" color="primary" onClick={addTask}>
-                Add
-              </Button>
-            </Box>
-          </div>
-        </Paper>
-      )}
+              <Box p="10px">
+                <Button variant="contained" color="primary" onClick={addTask}>
+                  Add
+                </Button>
+              </Box>
+            </div>
+          </Paper>
+        )}
       {visibleList.map((task: Todo, key: number) => {
         return <TodoTask key={key} task={task} completeTask={completeTask} />;
       })}
